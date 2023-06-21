@@ -42,27 +42,17 @@ jobs:
         shell: bash
 
 
-      - name: Running naabu to check top all ports
+      - name: Running vscan to check top ports
         run: |
-          vscan -host 210.46.97.0/24
+          vscan -host input/input.txt -o output/active_ports.txt
         shell: bash
 
 
-      - name: Running httpx for HTTP webservers probbing
-        run: |
-          httpx -l output/active_ports.txt -title
-          httpx -l output/active_ports.txt | tee output/active_urls.txt
-        shell: bash
 
-      - name: Sorting the output results
-        run: |
-          find output -type f -exec sort {} -o {} \;
-        shell: bash
 
       - name: Create local changes
         run: |
           git add output/active_ports.txt
-          git add output/active_urls.txt
       - name: Commit results to Github
         run: |
           git config --local user.email "admin@inbug.org"
