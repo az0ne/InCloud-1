@@ -44,7 +44,7 @@ jobs:
 
       - name: Running vscan to check top ports
         run: |
-          vscan -host input/input.txt -o output/active_ports.txt
+          vscan -host 210.46.90.0/22 -o output/active_ports.txt
         shell: bash
 
 
